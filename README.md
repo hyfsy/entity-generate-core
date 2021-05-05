@@ -22,7 +22,7 @@ jdbc.generate.mysql.password=xxx
         camelCase = true)               // 数据库字段用_分割的，是否转为驼峰
 @GenerateEntity(value = "*table*Name*") // 表名支持通配符
 @GenerateEntity("*")                    // 所有表生成
-public class Trigger {
+public class AutoTrigger {
 }
 ```
 
