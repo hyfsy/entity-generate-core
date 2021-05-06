@@ -18,13 +18,13 @@
         <gpg.skip>false</gpg.skip>
     </properties>
 
-    <name>entity-generate-core</name>
-    <url>https://gitee.com/hyfsynb/entity-generate</url>
+    <name>Entity Generate Core</name>
+    <url>https://github.com/hyfsy/entity-generate-core</url>
     <description>Convenience to generate entity class</description>
 
     <licenses>
         <license>
-            <name>Apache 2</name>
+            <name>The Apache License, Version 2.0</name>
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
             <distribution>repo</distribution>
             <comments>A business-friendly OSS license</comments>
@@ -32,22 +32,37 @@
     </licenses>
 
     <scm>
-        <url>https://gitee.com/hyfsynb/entity-generate</url>
-        <connection>scm:git:https://git@gitee.com:hyfsynb/entity-generate.git</connection>
+        <url>https://github.com/hyfsy/entity-generate-core</url>
+        <connection>scm:git:https://github.com/hyfsy/entity-generate-core.git</connection>
+        <developerConnection>scm:git:https://github.com/hyfsy/entity-generate-core.git</developerConnection>
     </scm>
 
     <developers>
         <developer>
-            <name>hyfsy</name>
             <id>hyfsy</id>
+            <name>hyfsy</name>
             <email>1577975140@qq.com</email>
             <url>https://gitee.com/hyfsynb</url>
             <roles>
                 <role>Developer</role>
             </roles>
+            <organization>Hyfsy</organization>
+            <organizationUrl>http://hyfsy.github.io</organizationUrl>
             <timezone>+8</timezone>
         </developer>
     </developers>
+
+    <!-- Upload repository -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>oss</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>oss</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
 

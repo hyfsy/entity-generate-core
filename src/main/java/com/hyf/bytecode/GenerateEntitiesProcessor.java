@@ -132,7 +132,7 @@ public class GenerateEntitiesProcessor extends AbstractProcessor {
     }
 
     private void generateTable(List<EntityMeta> entityMetaList) {
-        Gem.generate(entityMetaList);
+        Gen.generate(entityMetaList);
     }
 
     static void println(Object msg) {

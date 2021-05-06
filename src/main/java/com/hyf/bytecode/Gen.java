@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @author baB_hyf
  * @date 2021/05/03
  */
-public class Gem implements Opcodes {
+public class Gen implements Opcodes {
 
     public static final  String       JDBC_PROPERTIES_NAME     = "jdbc.properties";
     public static final  String       PROPERTIES_NAME_DRIVER   = "jdbc.generate.mysql.driver";
@@ -35,8 +35,8 @@ public class Gem implements Opcodes {
 
     static {
         try {
-            InputStream resource = Gem.class.getResourceAsStream("/" + JDBC_PROPERTIES_NAME);
-            ifNull(resource, "Cannot find the jdbc config file: " + Gem.class.getResource("/" + JDBC_PROPERTIES_NAME).getPath());
+            InputStream resource = Gen.class.getResourceAsStream("/" + JDBC_PROPERTIES_NAME);
+            ifNull(resource, "Cannot find the jdbc config file: " + Gen.class.getResource("/" + JDBC_PROPERTIES_NAME).getPath());
 
             Properties properties = new Properties();
             properties.load(resource);
@@ -485,7 +485,7 @@ public class Gem implements Opcodes {
      * @param fullClassName 类文件路径，如 com/hyf/Hello
      */
     private static void writeToFile(ClassWriter classWriter, String fullClassName) {
-        ClassLoader classLoader = Gem.class.getClassLoader();
+        ClassLoader classLoader = Gen.class.getClassLoader();
         URL resource = classLoader.getResource("");
         if (resource != null) {
             String savePath = resource.getPath().substring(1);
