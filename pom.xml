@@ -2,12 +2,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <!-- GAV -->
     <groupId>io.github.hyfsy</groupId>
     <artifactId>entity-generate-core</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <!-- mvn clean deploy -P release -->
+    <!-- deploy command: mvn clean deploy -P release -->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,12 +18,15 @@
         <jdk.version>8</jdk.version>
         <javadoc.skip>false</javadoc.skip>
         <gpg.skip>false</gpg.skip>
+        <auto.close.and.release>false</auto.close.and.release>
     </properties>
 
+    <!-- 项目基本信息 -->
     <name>Entity Generate Core</name>
     <url>https://github.com/hyfsy/entity-generate-core</url>
     <description>Convenience to generate entity class</description>
 
+    <!-- 授权 -->
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -31,6 +36,7 @@
         </license>
     </licenses>
 
+    <!-- SCM地址 -->
     <scm>
         <url>https://github.com/hyfsy/entity-generate-core</url>
         <connection>scm:git:https://github.com/hyfsy/entity-generate-core.git</connection>
@@ -38,11 +44,12 @@
     </scm>
 
     <developers>
+        <!-- 个人信息，可选 -->
         <developer>
             <id>hyfsy</id>
             <name>hyfsy</name>
             <email>1577975140@qq.com</email>
-            <url>https://gitee.com/hyfsynb</url>
+            <url>https://github.com/hyfsy</url>
             <roles>
                 <role>Developer</role>
             </roles>
@@ -51,18 +58,6 @@
             <timezone>+8</timezone>
         </developer>
     </developers>
-
-    <!-- Upload repository -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>oss</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-        </snapshotRepository>
-        <repository>
-            <id>oss</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <dependencies>
 
@@ -93,7 +88,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- 三方包，必须要有 -->
+        <!-- 三方包，依赖环境必须要有 -->
 
         <!--<dependency>-->
         <!--    <groupId>com.hyf</groupId>-->
@@ -111,162 +106,137 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <!-- Compile -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <encoding>UTF-8</encoding>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.plexus</groupId>
-                        <artifactId>plexus-compiler-javac</artifactId>
-                        <version>2.7</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            <!-- SureFire -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <includes>
-                        <include>**/bvt/**/*.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-            <!-- Source -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <attach>true</attach>
-                </configuration>
-            </plugin>
-            <!-- JavaDoc -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <!-- 忽略打包报错（文档不符合规范） -->
-                    <failOnError>false</failOnError>
-                    <doclint>none</doclint>
-                    <skip>${javadoc.skip}</skip>
-                    <show>public</show>
-                    <charset>UTF-8</charset>
-                    <encoding>UTF-8</encoding>
-                    <docencoding>UTF-8</docencoding>
-                    <links>
-                        <link>http://docs.oracle.com/javase/6/docs/api</link>
-                    </links>
-                </configuration>
-            </plugin>
-            <!-- GPG -->
-            <plugin>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <!-- 进行验签 -->
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <skip>${gpg.skip}</skip>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <!-- SureFire -->
+    <!--<plugin>-->
+    <!--    <groupId>org.apache.maven.plugins</groupId>-->
+    <!--    <artifactId>maven-surefire-plugin</artifactId>-->
+    <!--    <version>2.22.2</version>-->
+    <!--    <configuration>-->
+    <!--        <includes>-->
+    <!--            <include>**/bvt/**/*.java</include>-->
+    <!--        </includes>-->
+    <!--    </configuration>-->
+    <!--</plugin>-->
+    <!-- Source -->
 
-    <!--<profiles>-->
-    <!--    <profile>-->
-    <!--        <id>release</id>-->
-    <!--        <build>-->
-    <!--            <plugins>-->
-    <!--                &lt;!&ndash; Source &ndash;&gt;-->
-    <!--                <plugin>-->
-    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                    <artifactId>maven-source-plugin</artifactId>-->
-    <!--                    <version>2.2.1</version>-->
-    <!--                    <executions>-->
-    <!--                        <execution>-->
-    <!--                            <phase>package</phase>-->
-    <!--                            <goals>-->
-    <!--                                <goal>jar-no-fork</goal>-->
-    <!--                            </goals>-->
-    <!--                        </execution>-->
-    <!--                    </executions>-->
-    <!--                </plugin>-->
-    <!--                &lt;!&ndash; Javadoc &ndash;&gt;-->
-    <!--                <plugin>-->
-    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                    <artifactId>maven-javadoc-plugin</artifactId>-->
-    <!--                    <executions>-->
-    <!--                        <execution>-->
-    <!--                            <phase>package</phase>-->
-    <!--                            <goals>-->
-    <!--                                <goal>jar</goal>-->
-    <!--                            </goals>-->
-    <!--                            <configuration>-->
-    <!--                                <failOnError>false</failOnError>-->
-    <!--                                <doclint>none</doclint>-->
-    <!--                            </configuration>-->
-    <!--                        </execution>-->
-    <!--                    </executions>-->
-    <!--                </plugin>-->
-    <!--                &lt;!&ndash; GPG 进行验签 &ndash;&gt;-->
-    <!--                <plugin>-->
-    <!--                    <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                    <artifactId>maven-gpg-plugin</artifactId>-->
-    <!--                    <executions>-->
-    <!--                        <execution>-->
-    <!--                            <phase>verify</phase>-->
-    <!--                            <goals>-->
-    <!--                                <goal>sign</goal>-->
-    <!--                            </goals>-->
-    <!--                        </execution>-->
-    <!--                    </executions>-->
-    <!--                </plugin>-->
-    <!--            </plugins>-->
-    <!--        </build>-->
-    <!--        &lt;!&ndash; Upload repository &ndash;&gt;-->
-    <!--        <distributionManagement>-->
-    <!--            <snapshotRepository>-->
-    <!--                <id>oss</id>-->
-    <!--                <url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
-    <!--            </snapshotRepository>-->
-    <!--            <repository>-->
-    <!--                <id>oss</id>-->
-    <!--                <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>-->
-    <!--            </repository>-->
-    <!--        </distributionManagement>-->
-    <!--    </profile>-->
-    <!--</profiles>-->
+    <profiles>
+        <!-- 推荐在Release环境中添加这些插件和仓库，防止开发时打包慢 -->
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <!-- Compile -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <version>3.8.0</version>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                            <source>${jdk.version}</source>
+                            <target>${jdk.version}</target>
+                        </configuration>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.codehaus.plexus</groupId>
+                                <artifactId>plexus-compiler-javac</artifactId>
+                                <version>2.7</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
+                    <!-- Source 打源码包 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <attach>true</attach>
+                        </configuration>
+                    </plugin>
+                    <!-- JavaDoc 打JavaDoc包 -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- 忽略打包报错（文档不符合规范） -->
+                            <failOnError>false</failOnError>
+                            <doclint>none</doclint>
+                            <skip>${javadoc.skip}</skip>
+                            <show>public</show>
+                            <charset>UTF-8</charset>
+                            <encoding>UTF-8</encoding>
+                            <docencoding>UTF-8</docencoding>
+                            <links>
+                                <link>http://docs.oracle.com/javase/6/docs/api</link>
+                            </links>
+                        </configuration>
+                    </plugin>
+                    <!-- GPG -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <!-- 进行验签 -->
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <skip>${gpg.skip}</skip>
+                        </configuration>
+                    </plugin>
+                    <!-- 上传到Nexus中自动Close并Release，无需再进入Nexus操作 -->
+                    <plugin>
+                        <!-- 爆红不管 -->
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <!-- id要与settings.xml里的server指定的id保持一致 -->
+                            <serverId>sonatype-oss</serverId>
+                            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>${auto.close.and.release}</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <!-- Upload repository -->
+            <distributionManagement>
+                <!-- id要与settings.xml里的server指定的id保持一致 -->
+                <snapshotRepository>
+                    <id>sonatype-oss</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+                </snapshotRepository>
+                <repository>
+                    <id>sonatype-oss</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>
